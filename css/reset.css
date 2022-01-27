@@ -1,0 +1,15 @@
+* {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    box-sizing: border-box;
+
+}
+
+body {
+    /* setting a font size for all child elements that can then be relatively referenced */
+    font-size: 18px;
+    /* sets the space between lines of text */
+    line-height: 1;
+    font-family: 'Ubuntu', Tahoma, Geneva, Verdana, sans-serif;
+}

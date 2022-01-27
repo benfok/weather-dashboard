@@ -1,0 +1,168 @@
+:root {
+    --bgcolor: blue;
+}
+
+
+header {
+    padding: 2rem;
+    width: 100%;
+    background-color: var(--bgcolor);
+}
+
+h1 {
+    text-align: center;
+    font-size: 250%;
+}
+
+main {
+    min-height: 100vh;
+}
+
+form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.search-field {
+    margin: 1rem auto 10px auto;
+    flex: 1 0 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+}
+
+label {
+    flex: 1 0 20%;
+}
+
+#search {
+    border-radius: 5px;
+    padding: 5px;
+    flex: 1 0 75%;
+    margin-left: 10px;
+}
+
+#submit {
+    width: 85%;
+    border-radius: 5px;
+    padding: 5px;
+    flex: 1 0 100%;
+    margin-bottom: 2rem;
+}
+
+.recent-search, .search-results {
+    padding: 1rem;
+    margin: 1rem auto 10px auto;
+}
+
+li {
+    list-style: none;
+    text-decoration: none;
+    padding-bottom: 5px;
+    margin: 5px 0 5px 0;
+}
+
+#no-results {
+    display: none;
+}
+
+.recent-list, .results-list {
+    border: 1px solid lightgray;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.cities:hover {
+    cursor: pointer;
+}
+
+.main-weather{
+    padding: 1rem;
+    margin: 1rem 1rem;
+    border: 1px solid black; 
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+h2 {
+    font-size: 150%;
+    margin-bottom: 15px;
+    flex: 1 0 100%;
+}
+
+.main-data-titles, .main-data, .main-icon {
+    flex: 1 0 33%;
+    padding-right: 5px;
+}
+
+.main-icon {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#icon-main, #desc-main {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+.weather-card {
+    padding: 2rem;
+    margin: 1rem 1rem;
+    border: 1px solid black;
+    flex: 1 0 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+h3 {
+    margin-bottom: 15px;
+    flex: 1 0 60%;
+}
+
+.card-icon {
+    flex: 1 0 40%;
+}
+
+.card-titles, .card-data {
+    flex: 1 0 50%;
+    padding-right: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+}
+
+/* media query for larger screens */
+@media screen and (min-width: 568px) {
+    .card-container {
+        padding: 0;
+    }
+    
+    .weather-card {
+        flex: 1 0 40%;
+        margin: 10px;
+        padding: 10px;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+    .search-section {
+        max-width: 500px;
+        height: 100%;
+    }
+}
