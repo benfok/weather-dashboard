@@ -1,12 +1,18 @@
 :root {
-    --bgcolor: blue;
+    --bgcolor: #092238;
+    --hdrcolor: #031633;
+    --lightfont: #9FD1E0;
+    --highlight: #0DCAF0;
+    --highlightbg: rgb(233, 251, 255);
 }
 
 
 header {
     padding: 2rem;
     width: 100%;
-    background-color: var(--bgcolor);
+    background-color: var(--hdrcolor);
+    color: var(--lightfont);
+    border-bottom: solid 1px var(--lightfont);
 }
 
 h1 {
@@ -16,12 +22,25 @@ h1 {
 
 main {
     min-height: 100vh;
+    background-color: var(--bgcolor);
+}
+
+.search-section {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.intro {
+    padding: 2rem 1rem 1rem 1rem;
+    color: var(--lightfont);
 }
 
 form {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    padding: 1rem;
+    color: var(--lightfont);
 }
 
 .search-field {
@@ -31,7 +50,7 @@ form {
     flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
-    width: 85%;
+    width: 100%;
 }
 
 label {
@@ -40,22 +59,23 @@ label {
 
 #search {
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     flex: 1 0 75%;
     margin-left: 10px;
 }
 
 #submit {
-    width: 85%;
+    width: 100%;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     flex: 1 0 100%;
-    margin-bottom: 2rem;
 }
 
 .recent-search, .search-results {
     padding: 1rem;
     margin: 1rem auto 10px auto;
+    font-size: 80%;
+    color: var(--lightfont);
 }
 
 li {
@@ -65,32 +85,45 @@ li {
     margin: 5px 0 5px 0;
 }
 
-#no-results {
-    display: none;
-}
-
 .recent-list, .results-list {
     border: 1px solid lightgray;
     background-color: whitesmoke;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
+    color: var(--hdrcolor);
 }
 
-.cities:hover {
+.cities:hover, #submit:hover, button:hover {
     cursor: pointer;
+    border: solid 3px var(--highlight);
+    background-color: var(--highlightbg);
+}
+
+#clear {
+    cursor: pointer;
+    padding: 5px;
+    width: 100px;
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+
+.weather-section {
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
 }
 
 .main-weather{
     padding: 1rem;
     margin: 1rem 1rem;
     border: 1px solid black; 
-    display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    background-color: var(--highlightbg);
 }
 
 h2 {
-    font-size: 150%;
+    font-size: 120%;
     margin-bottom: 15px;
     flex: 1 0 100%;
 }
@@ -111,20 +144,20 @@ h2 {
 }
 
 .card-container {
-    display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .weather-card {
-    padding: 2rem;
+    padding: 1rem;
     margin: 1rem 1rem;
     border: 1px solid black;
     flex: 1 0 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    background-color: var(--highlightbg);
 }
 
 h3 {
@@ -133,21 +166,48 @@ h3 {
 }
 
 .card-icon {
+    flex: 1 0 45%;
+}
+
+.card-titles {
+    flex: 1 0 55%;
+    padding-right: 10px;
+}
+
+.card-data {
     flex: 1 0 40%;
 }
 
-.card-titles, .card-data {
-    flex: 1 0 50%;
-    padding-right: 5px;
+.uvi {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.uv-low {
+    background-color: green;
+    color: white;
+}
+
+.uv-mod {
+    background-color: yellow;
+    color: black;
+}
+
+.uv-high {
+    background-color: red;
+    color: white;
 }
 
 footer {
     text-align: center;
     padding: 2rem;
+    background-color: var(--hdrcolor);
+    color: var(--lightfont);
+    border-top: solid 1px var(--lightfont);
 }
 
 /* media query for larger screens */
-@media screen and (min-width: 568px) {
+@media screen and (min-width: 576px) {
     .card-container {
         padding: 0;
     }
@@ -158,11 +218,93 @@ footer {
         padding: 10px;
     }
 
+    .recent-search, .search-results {
+        font-size: 100%;
+    }
+
+    h2 {
+        font-size: 150%;
+    }
+
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 768px) {
+    main {
+        display:flex;
+        flex-flow: row nowrap;
+        max-width: 100vw;
+    }
+    
     .search-section {
         max-width: 500px;
         height: 100%;
+        flex: 1 0 50%;
+    }
+
+    .weather-section {
+        flex: 1 0 50%;
+    }
+
+    .card-container {
+        padding: 1rem;
+    }
+
+    .weather-card {
+        flex: 1 0 100%;
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+
+@media screen and (min-width: 992px) {
+    main {
+        display:flex;
+        flex-flow: row nowrap;
+        max-width: 100vw;
+    }
+    
+    .search-section {
+        max-width: 500px;
+        height: 100%;
+        flex: 1 0 40%;
+    }
+
+    .weather-section {
+        flex: 1 0 60%;
+    }
+
+    .weather-card {
+        flex: 1 0 40%;
+        margin: 10px;
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    main {
+        display:flex;
+        flex-flow: row nowrap;
+        max-width: 100vw;
+    }
+    
+    .search-section {
+        max-width: 500px;
+        height: 100%;
+        flex: 1 0 30%;
+    }
+
+    .weather-section {
+        flex: 1 0 70%;
+    }
+
+    .card-container {
+        padding: 1rem 5px 0 5px;
+    }
+
+    .weather-card {
+        flex: 1 0 20%;
+        margin: 5px;
+        padding: 10px;
     }
 }
