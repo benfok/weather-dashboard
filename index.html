@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main>
+        <section class="search-section">
+            <form>
+                <div class="search-field">
+                    <label for="search">City:</label>
+                    <input type="search" id="search" name="search" placeholder="Enter City Name">
+                </div>
+                <input type="submit" id="submit" value="Search">
+            </form>
+            <div class="search-results">
+                <p>Search Results:</p>
+                <ul id="results">
+                    <!-- <li class="results-list" id="no-results">No Results</li> -->
+                </ul>
+            </div>
+            <div class="recent-search">
+                <p>Recent Searches:</p>
+                <ul>
+                    <li class="recent-list">No Recent Searches</li>
+                </ul>
+            </div>
+            <button id="test">Test</button>
+        </section>
+        <section>
+            <article class="main-weather">
+                <h2 id="city-name">City</h2>
+                <h2 id="date0">Date</h2>
+                <ul class="main-data-titles">
+                    <li>Temp:</li>
+                    <li>Wind:</li>
+                    <li>Humidity:</li>
+                    <li>UV Index:</li>
+                </ul>
+                <ul class="main-data">
+                    <li id="temp0">X</li>
+                    <li id="wind0">X</li>
+                    <li id="humidity0">X</li>
+                    <li id="UV0">X</li>
+                </ul>
+                <div class="main-icon">
+                    <img src="#" id="icon-main" alt="#" height="80" width="80">
+                    <p id="desc-main"></p>
+                </div>
+            </article>
+            <article class="card-container">
+                <div class="weather-card">
+                    <h3 id="date1">Date</h3>
+                    <img id="icon1" src="#" alt="#">
+                    <ul class="card-titles">
+                        <li>Temp:</li>
+                        <li>Wind:</li>
+                        <li>Humidity:</li>
+                        <li>UV Index:</li>
+                    </ul>
+                    <ul class="card-data">
+                        <li id="temp1">X</li>
+                        <li id="wind1">X</li>
+                        <li id="humidity1">X</li>
+                        <li id="UV1">X</li>
+                    </ul>
+                </div>
+                <div class="weather-card">
+                    <h3 id="date2">Date</h3>
+                    <img id="icon2" src="#" alt="#">
+                    <ul class="card-titles">
+                        <li>Temp:</li>
+                        <li>Wind:</li>
+                        <li>Humidity:</li>
+                        <li>UV Index:</li>
+                    </ul>
+                    <ul class="card-data">
+                        <li id="temp2">X</li>
+                        <li id="wind2">X</li>
+                        <li id="humidity2">X</li>
+                        <li id="UV2">X</li>
+                    </ul>
+                </div>
+                <div class="weather-card">
+                    <h3 id="date3">Date</h3>
+                    <img id="icon3" src="#" alt="#">
+                    <ul class="card-titles">
+                        <li>Temp:</li>
+                        <li>Wind:</li>
+                        <li>Humidity:</li>
+                        <li>UV Index:</li>
+                    </ul>
+                    <ul class="card-data">
+                        <li id="temp3">X</li>
+                        <li id="wind3">X</li>
+                        <li id="humidity3">X</li>
+                        <li id="UV3">X</li>
+                    </ul>
+                </div>
+                <div class="weather-card">
+                    <h3 id="date4">Date</h3>
+                    <img id="icon4" src="#" alt="#">
+                    <ul class="card-titles">
+                        <li>Temp:</li>
+                        <li>Wind:</li>
+                        <li>Humidity:</li>
+                        <li>UV Index:</li>
+                    </ul>
+                    <ul class="card-data">
+                        <li id="temp4">X</li>
+                        <li id="wind4">X</li>
+                        <li id="humidity4">X</li>
+                        <li id="UV4">X</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer>
+        Tidy Lines LLC
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./scripts/script.js"></script>
+</body>
+</html>
