@@ -177,7 +177,6 @@ let citySelect = function(){
     cities.forEach(function(city){
         city.addEventListener('click', function(){
         chosenCity = city;
-        console.log(chosenCity);
         addCityToStorage(city);
         getWeather();
         });
