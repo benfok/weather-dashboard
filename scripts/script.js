@@ -117,12 +117,13 @@ let renderForecast = function(data) {
         let value = document.getElementById('UV'+i);
         let uvi = data.daily[i].uvi;
         value.textContent = uvi;
+        // supporting all browsers
         if (uvi < 3 || uvi === 0) {
-                value.className += ' uv-low';
+                value.className = 'uvi uv-low';
         } else if (uvi >= 3 && uvi < 6) {
-                value.className += ' uv-mod';
+                value.className = 'uvi uv-mod';
         } else {
-                value.className += ' uv-high';
+                value.className = 'uvi uv-high';
         }
     };    
 };
@@ -161,7 +162,7 @@ let addCityToStorage = function (city) {
             return;
         }
     };
-    savedCities.push(str);
+    savedCities.unshift(str);
     // retain array format for parsing later
     localStorage.setItem('savedCities', JSON.stringify(savedCities));
     renderSavedList();
