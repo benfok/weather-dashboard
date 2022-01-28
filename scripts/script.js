@@ -4,17 +4,20 @@ let cityName = document.getElementById('city-name');
 let chosenCity;
 let savedCities = [];
 
+// convert unix time from API to readable date format
 let convertTime = function(unix){
     let millis = unix * 1000;
     let dateObject = new Date(millis);
     return dateObject.toLocaleDateString();
 };
 
+// weather cards are hidden by default. Display upon location selection
 let displayWeather = function() {
     document.querySelector('.main-weather').style.display = 'flex';
     document.querySelector('.card-container').style.display = 'flex';
 };
 
+// function API call to return 5 search results for location
 let getCities = function(searchEntry) {
     let apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${searchEntry}&limit=5&appid=feb08a39587f398b12842fe3303816d6`;
     // console.log(apiUrl);   
@@ -33,6 +36,7 @@ let getCities = function(searchEntry) {
         });
     };
 
+// function API call using lat and long coordinates from chosen location to pull back weather. API actually provides 7 day forecast.
 let getWeather = function() {
     // console.log(chosenCity);
     cityName.textContent = chosenCity.textContent;
@@ -44,6 +48,7 @@ let getWeather = function() {
                 } 
         return response.json();    
     })
+    // after receiving the data, render the weather forecast and display the cards
     .then(function (data){
         renderWeather(data);
         renderForecast(data);
@@ -57,7 +62,7 @@ let getWeather = function() {
 let renderResults = function(data){
     // clear the search results
     searchResults.innerHTML = '';
-    // if no results returned displaty a message
+    // if no results returned display a message
     let str = '';
     if (data.length === 0) {
         let listEl = `<li class="results-list cities">No Results - Please Search Again</li>`;
@@ -69,17 +74,20 @@ let renderResults = function(data){
             str += listEL;
         };
     }
+    // add cities as a list
     searchResults.innerHTML += str;
+    // activate event listeners on the newly created <li>s
     citySelect();
 };
 
 let renderWeather = function(data) {
-    //main weather icons and description
+    //render main weather, icon and description
     let date = convertTime(data.current.dt);
     document.getElementById('date0').textContent = date;
     document.getElementById('temp0').textContent = data.current.temp + '°F';
     document.getElementById('wind0').textContent = data.current.wind_speed + 'mph';
     document.getElementById('humidity0').textContent = data.current.humidity + '%';
+    // format UV based on value
     let value = document.getElementById('UV0');
     let uvi = data.current.uvi;
     value.textContent = uvi;
@@ -91,14 +99,16 @@ let renderWeather = function(data) {
             value.className += ' uv-high';
     }
     let icon = data.current.weather[0].icon;
+    // icon and description
     document.getElementById('icon-main').src = `https://openweathermap.org/img/wn/${icon}.png`;
     document.getElementById('desc-main').textContent = data.current.weather[0].description;
     document.getElementById('icon-main').alt = data.current.weather[0].main;
+    // remove background placeholder image when weather is displayed
     document.querySelector('.weather-section').style.backgroundImage = '';
 };
 
 let renderForecast = function(data) {
-    // other 4 day forcast from daily array in the API object
+    // other 4 day forecast from daily array in the API object. Loop through the data array to populate the values
     for (i = 1; i < 5; i++) {
         let date = convertTime(data.daily[i].dt);
         document.getElementById('date'+i).textContent = date;
@@ -117,6 +127,7 @@ let renderForecast = function(data) {
     for (i = 1; i < 5; i++) {
         document.getElementById('humidity'+i).textContent = data.daily[i].humidity + '%';
     };    
+    // UV formatting. Could have possibly been combined in a function to avoid repeating from main-weather rendering
     for (i = 1; i < 5; i++) {
         let value = document.getElementById('UV'+i);
         let uvi = data.daily[i].uvi;
@@ -131,46 +142,56 @@ let renderForecast = function(data) {
     };    
 };
 
+// event listener for search function
 document.getElementById('submit').addEventListener('click', function(event){
     event.preventDefault();
+    // handle blank search
     if (searchEntry.value === '') {
         alert('Please enter a city name into the search box');
     } else {
+    // run API to return results
     getCities(searchEntry.value);
     }
 });
 
 // retrieve recent searches from storage
 let getSavedCities = function() {
+    // check that localStorage exists and if not show message to user within Search History section
     if (!localStorage.getItem('savedCities')) {
         document.getElementById('saved-cities').innerHTML = `<li class="recent-list">No Saved Data</li>`;
         return;
     }
+    // retrieve and parse data into savedCities array
     let data = localStorage.getItem('savedCities');
     savedCities = JSON.parse(data);
+    // render search history
     renderSavedList();
 };
 
-// add the selected city to local storage
+// add the selected city to local storage by first adding to savedCities variable then pushing that to localStorage as a string
 let addCityToStorage = function (city) {
     let str = (city.outerHTML);
     for (i=0; i<savedCities.length; i++) {
         if (str === savedCities[i]){
             return;
         }
-    }
+    };
     savedCities.push(str);
+    // retain array format for parsing later
     localStorage.setItem('savedCities', JSON.stringify(savedCities));
     renderSavedList();
 };
 
+// renders the search history to the page
 let renderSavedList = function (){
     document.getElementById('saved-cities').innerHTML = '';
     let str = savedCities.join('');
     document.getElementById('saved-cities').innerHTML = str;
+    // calls this function to ensure addeventlistener is active on the search history items
     citySelect();
-}
+};
 
+// loops through all items in search results and history to activate event listener so clicking will pull up weather
 let citySelect = function(){
     let cities = document.querySelectorAll('.cities')
 
@@ -190,6 +211,7 @@ document.getElementById('clear').addEventListener('click', function(){
     getSavedCities();
 });
 
+// get search history upon page load
 window.addEventListener('load', function() {
     getSavedCities();
 });
