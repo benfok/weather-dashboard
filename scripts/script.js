@@ -1,6 +1,7 @@
 let searchEntry = document.getElementById('search');
 let searchResults = document.getElementById('results');
 let cityName = document.getElementById('city-name');
+
 let chosenCity;
 let savedCities = [];
 
@@ -52,6 +53,7 @@ let getWeather = function() {
     .then(function (data){
         renderWeather(data);
         renderForecast(data);
+        console.log(data);
         displayWeather();
         })
     .catch(function (error) {
@@ -81,25 +83,8 @@ let renderResults = function(data){
 };
 
 let renderWeather = function(data) {
-    //render main weather, icon and description
-    let date = convertTime(data.current.dt);
-    document.getElementById('date0').textContent = date;
-    document.getElementById('temp0').textContent = data.current.temp + '°F';
-    document.getElementById('wind0').textContent = data.current.wind_speed + 'mph';
-    document.getElementById('humidity0').textContent = data.current.humidity + '%';
-    // format UV based on value
-    let value = document.getElementById('UV0');
-    let uvi = data.current.uvi;
-    value.textContent = uvi;
-    if (uvi < 3 || uvi === 0) {
-            value.className += ' uv-low';
-    } else if (uvi >= 3 && uvi < 6) {
-            value.className += ' uv-mod';
-    } else {
-            value.className += ' uv-high';
-    }
+    // main weather icon and description
     let icon = data.current.weather[0].icon;
-    // icon and description
     document.getElementById('icon-main').src = `https://openweathermap.org/img/wn/${icon}.png`;
     document.getElementById('desc-main').textContent = data.current.weather[0].description;
     document.getElementById('icon-main').alt = data.current.weather[0].main;
@@ -108,27 +93,27 @@ let renderWeather = function(data) {
 };
 
 let renderForecast = function(data) {
-    // other 4 day forecast from daily array in the API object. Loop through the data array to populate the values
-    for (i = 1; i < 5; i++) {
+    // 5 day forecast from daily array in the API object. Loop through the data array to populate the values
+    for (i = 0; i < 6; i++) {
         let date = convertTime(data.daily[i].dt);
         document.getElementById('date'+i).textContent = date;
     };
-    for (i = 1; i < 5; i++) {
+    for (i = 1; i < 6; i++) {
         let icon = data.daily[i].weather[0].icon;
         document.getElementById('icon'+i).src = `https://openweathermap.org/img/wn/${icon}.png`;
         document.getElementById('icon'+i).alt = data.daily[i].weather[0].main;
     };    
-    for (i = 1; i < 5; i++) {
+    for (i = 0; i < 6; i++) {
         document.getElementById('temp'+i).textContent = data.daily[i].temp.day + '°F';
     };    
-    for (i = 1; i < 5; i++) {
+    for (i = 0; i < 6; i++) {
         document.getElementById('wind'+i).textContent = data.daily[i].wind_speed + 'mph';
     };    
-    for (i = 1; i < 5; i++) {
+    for (i = 0; i < 6; i++) {
         document.getElementById('humidity'+i).textContent = data.daily[i].humidity + '%';
     };    
     // UV formatting. Could have possibly been combined in a function to avoid repeating from main-weather rendering
-    for (i = 1; i < 5; i++) {
+    for (i = 0; i < 6; i++) {
         let value = document.getElementById('UV'+i);
         let uvi = data.daily[i].uvi;
         value.textContent = uvi;
