@@ -91,7 +91,7 @@ let renderWeather = function(data) {
     let value = document.getElementById('UV0');
     let uvi = data.current.uvi;
     value.textContent = uvi;
-    if (uvi < 3) {
+    if (uvi < 3 || uvi === 0) {
             value.className += ' uv-low';
     } else if (uvi >= 3 && uvi < 6) {
             value.className += ' uv-mod';
@@ -132,7 +132,7 @@ let renderForecast = function(data) {
         let value = document.getElementById('UV'+i);
         let uvi = data.daily[i].uvi;
         value.textContent = uvi;
-        if (uvi < 3) {
+        if (uvi < 3 || uvi === 0) {
                 value.className += ' uv-low';
         } else if (uvi >= 3 && uvi < 6) {
                 value.className += ' uv-mod';
