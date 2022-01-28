@@ -3,7 +3,10 @@
     --hdrcolor: #031633;
     --lightfont: #9FD1E0;
     --highlight: #0DCAF0;
-    --highlightbg: rgb(233, 251, 255);
+    --highlightbg: rgb(204, 246, 255);
+    --cardbg: #9FD1E0;
+    --buttonbg: #031633;
+    --offwhite: whitesmoke;
 }
 
 
@@ -62,6 +65,7 @@ label {
     padding: 10px;
     flex: 1 0 75%;
     margin-left: 10px;
+
 }
 
 #submit {
@@ -69,6 +73,7 @@ label {
     border-radius: 5px;
     padding: 10px;
     flex: 1 0 100%;
+    
 }
 
 .recent-search, .search-results {
@@ -86,17 +91,18 @@ li {
 }
 
 .recent-list, .results-list {
-    border: 1px solid lightgray;
-    background-color: whitesmoke;
+    border: 1px solid var(--lightfont);
+    background-color: var(--buttonbg);
     border-radius: 5px;
     padding: 10px;
-    color: var(--hdrcolor);
+    color: var(--lightfont);
 }
 
 .cities:hover, #submit:hover, button:hover {
     cursor: pointer;
     border: solid 3px var(--highlight);
     background-color: var(--highlightbg);
+    color: var(--hdrcolor);
 }
 
 #clear {
@@ -119,7 +125,8 @@ li {
     border: 1px solid black; 
     flex-flow: row wrap;
     justify-content: space-between;
-    background-color: var(--highlightbg);
+    background-color: var(--cardbg);
+    border-radius: 10px;
 }
 
 h2 {
@@ -157,7 +164,8 @@ h2 {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    background-color: var(--highlightbg);
+    background-color: var(--cardbg);
+    border-radius: 10px;
 }
 
 h3 {
