@@ -30,6 +30,7 @@ let getCities = function(searchEntry) {
             return response.json();    
         })
         .then(function (data){
+            console.log(data);
             renderResults(data);
             })
         .catch(function (error) {
@@ -53,7 +54,7 @@ let getWeather = function() {
     .then(function (data){
         renderWeather(data);
         renderForecast(data);
-        console.log(data);
+        // console.log(data);
         displayWeather();
         })
     .catch(function (error) {
@@ -83,7 +84,26 @@ let renderResults = function(data){
 };
 
 let renderWeather = function(data) {
-    // main weather icon and description
+    // current weather 
+    let unix = data.current.dt + data.timezone_offset
+    // console.log(unix);
+    let date = convertTime(unix);
+    document.getElementById('date0').textContent = date;
+    document.getElementById('temp0').textContent = data.current.temp + '°F';
+    document.getElementById('wind0').textContent = data.current.wind_speed + 'mph';
+    document.getElementById('humidity0').textContent = data.current.humidity + '%';
+    document.getElementById('UV0').textContent = data.current.uvi;
+        let value = document.getElementById('UV'+i);
+        let uvi = data.current.uvi;
+        value.textContent = uvi;
+        // supporting all browsers
+        if (uvi < 3 || uvi === 0) {
+                value.className = 'uvi uv-low';
+        } else if (uvi >= 3 && uvi < 6) {
+                value.className = 'uvi uv-mod';
+        } else {
+                value.className = 'uvi uv-high';
+        };
     let icon = data.current.weather[0].icon;
     document.getElementById('icon-main').src = `https://openweathermap.org/img/wn/${icon}.png`;
     document.getElementById('desc-main').textContent = data.current.weather[0].description;
@@ -94,8 +114,10 @@ let renderWeather = function(data) {
 
 let renderForecast = function(data) {
     // 5 day forecast from daily array in the API object. Loop through the data array to populate the values
-    for (i = 0; i < 6; i++) {
-        let date = convertTime(data.daily[i].dt);
+    for (i = 1; i < 6; i++) {
+        let unix = data.daily[i].dt + data.timezone_offset
+        let date = convertTime(unix);
+        // console.log(unix);
         document.getElementById('date'+i).textContent = date;
     };
     for (i = 1; i < 6; i++) {
@@ -103,13 +125,13 @@ let renderForecast = function(data) {
         document.getElementById('icon'+i).src = `https://openweathermap.org/img/wn/${icon}.png`;
         document.getElementById('icon'+i).alt = data.daily[i].weather[0].main;
     };    
-    for (i = 0; i < 6; i++) {
+    for (i = 1; i < 6; i++) {
         document.getElementById('temp'+i).textContent = data.daily[i].temp.day + '°F';
     };    
-    for (i = 0; i < 6; i++) {
+    for (i = 1; i < 6; i++) {
         document.getElementById('wind'+i).textContent = data.daily[i].wind_speed + 'mph';
     };    
-    for (i = 0; i < 6; i++) {
+    for (i = 1; i < 6; i++) {
         document.getElementById('humidity'+i).textContent = data.daily[i].humidity + '%';
     };    
     // UV formatting. Could have possibly been combined in a function to avoid repeating from main-weather rendering
