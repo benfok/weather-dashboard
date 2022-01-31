@@ -30,11 +30,12 @@ let getCities = function(searchEntry) {
             return response.json();    
         })
         .then(function (data){
-            console.log(data);
+            // console.log(data);
             renderResults(data);
             })
         .catch(function (error) {
             alert('Unable to connect to OpenWeatherMap.org');
+            console.log(error);
         });
     };
 
@@ -59,6 +60,7 @@ let getWeather = function() {
         })
     .catch(function (error) {
         alert('Unable to connect to OpenWeatherMap.org');
+        console.log(error);
     });
 };
 
@@ -85,15 +87,15 @@ let renderResults = function(data){
 
 let renderWeather = function(data) {
     // current weather 
-    let unix = data.current.dt + data.timezone_offset
+    let unix = data.current.dt + data.timezone_offset;
     // console.log(unix);
     let date = convertTime(unix);
     document.getElementById('date0').textContent = date;
     document.getElementById('temp0').textContent = data.current.temp + '°F';
     document.getElementById('wind0').textContent = data.current.wind_speed + 'mph';
     document.getElementById('humidity0').textContent = data.current.humidity + '%';
-    document.getElementById('UV0').textContent = data.current.uvi;
-        let value = document.getElementById('UV'+i);
+ 
+        let value = document.getElementById('UV0');
         let uvi = data.current.uvi;
         value.textContent = uvi;
         // supporting all browsers
@@ -115,9 +117,8 @@ let renderWeather = function(data) {
 let renderForecast = function(data) {
     // 5 day forecast from daily array in the API object. Loop through the data array to populate the values
     for (i = 1; i < 6; i++) {
-        let unix = data.daily[i].dt + data.timezone_offset
+        let unix = data.daily[i].dt + data.timezone_offset;
         let date = convertTime(unix);
-        // console.log(unix);
         document.getElementById('date'+i).textContent = date;
     };
     for (i = 1; i < 6; i++) {
@@ -135,7 +136,7 @@ let renderForecast = function(data) {
         document.getElementById('humidity'+i).textContent = data.daily[i].humidity + '%';
     };    
     // UV formatting. Could have possibly been combined in a function to avoid repeating from main-weather rendering
-    for (i = 0; i < 6; i++) {
+    for (i = 1; i < 6; i++) {
         let value = document.getElementById('UV'+i);
         let uvi = data.daily[i].uvi;
         value.textContent = uvi;
