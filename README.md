@@ -14,6 +14,8 @@ The repository in GitHub is [here](https://github.com/benfok/weather-dashboard)
 - CSS
 - JavaScript
 - Google Fonts
+- OpenWeatherAPI: Geocoding API to pull location data
+- OpenWeatherAPI: OneCall API to pull current and extended forecast data 
 
 ## Screenshot
 Here is a screenshot of my finished page. Some key details and learnings are below.
