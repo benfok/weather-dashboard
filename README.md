@@ -9,6 +9,12 @@ The deployed website can be found [here](https://benfok.github.io/weather-dashbo
 
 The repository in GitHub is [here](https://github.com/benfok/weather-dashboard)
 
+## Languages, Skills and Credits
+- HTML
+- CSS
+- JavaScript
+- Google Fonts
+
 ## Screenshot
 Here is a screenshot of my finished page. Some key details and learnings are below.
 
